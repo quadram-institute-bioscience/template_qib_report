@@ -7,8 +7,8 @@ titlepage: true,
 titlepage-text-color: "FFFFFF"
 titlepage-rule-color: "360049"
 titlepage-rule-height: 0
-titlepage-background: "titlepage-fig.pdf"
-page-background: "letterhead-fig.pdf"
+titlepage-background: "`assets/titlepage-fig.pdf`{=latex}"
+page-background: "`assets/letterhead-fig.pdf`{=latex}"
 page-background-opacity: "1"
 book: true
 classoption: [oneside]
@@ -38,3 +38,8 @@ Detraxit consequat et quo num tendi nada. Praesent malesuada urna nisi, quis vol
 Nec orci ornare consequat. Praesent lacinia ultrices consectetur. Sed non ipsum felis. Tá deprimidis, eu conheço uma cachacis que pode alegrar sua vidis. Nullam volutpat risus nec leo commodo, ut interdum diam laoreet. Sed non consequat odio. Vehicula non. Ut sed ex eros. Vivamus sit amet nibh non tellus tristique interdum.
 
 Casamentiss faiz malandris se pirulitá. Suco de cevadiss, é um leite divinis, qui tem lupuliz, matis, aguis e fermentis. Quem manda na minha terra sou euzis! Mais vale um bebadis conhecidiss, que um alcoolatra anonimis.
+
+![Example of a PDF figure in MD](template_figures/jitter_lineages.pdf)
+
+## Timestamp <br>
+You can add html tags to your markdown and they will be rendered in the pdf. <br>
