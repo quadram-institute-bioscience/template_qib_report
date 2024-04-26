@@ -14,12 +14,11 @@ pip install -e . # installs in development mode (modifications to python files a
 In summary, the only conda package needed is `pandoc`. BTW `texlive-core` from conda must not be installed.
 There is a system package which might need to be installed outside conda, `texlive`:
 ```
-apt-get install texlive-full 
+apt-get install texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra
 ```
-This is for the PDF report generation.
-`texlive-full` is huge (6GB of disk), but you won't need to worry about missing fonts again.
-If you want something smaller you can try, from smaller to larger: `texlive-latex-base`, `texlive-latex-recommended`, 
-`texlive-fonts-recommended`, `texlive-plain-generic`, and `texlive-latex-extra`, until `pandoc` compiles the PDF without errors.
+This will install `texlive-base` etc. for the PDF report generation, and it will take 1GB of disk space.
+Another option is to install `texlive-full`, which is huge (6GB of disk) but installs everything;  you won't need to worry about missing fonts never again.
+For some reason the conda package `texlive-core` does not work...
 
 The PDF report generation relies on the [Eisvogel latex template for pandoc](https://github.com/Wandmalfarbe/pandoc-latex-template), 
 released under a BSD 3-clause.
