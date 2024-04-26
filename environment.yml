@@ -1,4 +1,4 @@
-name: pandoc_report_qib 
+name: template_qib_report
 channels:
   - conda-forge
   - bioconda
