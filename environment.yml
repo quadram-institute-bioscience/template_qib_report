@@ -1,0 +1,14 @@
+name: pandoc_report_qib 
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+#  - python>3.6
+  - pandoc>2.8
+#  - pandas
+#  - pip
+  - pip:
+#  - .  # this means run pip on this directory's setup.py 
+#    - pytools==2020.1
+#    - pandas_profiling
