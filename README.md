@@ -11,13 +11,15 @@ conda env update -f environment.yml # update conda evironment after changing dep
 pip install -e . # installs in development mode (modifications to python files are live)
 ```
 
+In summary, the only conda package needed is `pandoc`. BTW `texlive-core` from conda must not be installed.
 There is a system package which might need to be installed outside conda, `texlive`:
 ```
-apt-get install texlive-full
+apt-get install texlive-full 
 ```
-This is for the PDF report generation. `texlive-full` is huge (6GB of disk), but you won't need to worry about missing fonts again.
+This is for the PDF report generation.
+`texlive-full` is huge (6GB of disk), but you won't need to worry about missing fonts again.
 If you want something smaller you can try, from smaller to larger: `texlive-latex-base`, `texlive-latex-recommended`, 
-`texlive-fonts-recommended`, and `texlive-latex-extra`, until `pandoc` compiles the PDF without errors.
+`texlive-fonts-recommended`, `texlive-plain-generic`, and `texlive-latex-extra`, until `pandoc` compiles the PDF without errors.
 
 The PDF report generation relies on the [Eisvogel latex template for pandoc](https://github.com/Wandmalfarbe/pandoc-latex-template), 
 released under a BSD 3-clause.
@@ -31,8 +33,10 @@ These templates are based on the report generation from https://github.com/quadr
 
 ## How to run
 The markdown files are a bit different between the HTML and PDF versions: the headers and the figures (the PDF assumes PDF figures while HTML
-assume an image format). 
-The YAML header is translated into latex by pandoc, and we have to tell pandoc they're already translated (thus the \`file.pdf\` {=latex} syntax).
+assume an image format).
+
+The YAML header is translated into latex by pandoc. Thus we have to tell pandoc they're already translated if we have weird filenames 
+(something like \`file-hyphenated.pdf\`{=latex} syntax).
 
 
 ```

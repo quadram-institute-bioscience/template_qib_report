@@ -7,8 +7,8 @@ titlepage: true,
 titlepage-text-color: "FFFFFF"
 titlepage-rule-color: "360049"
 titlepage-rule-height: 0
-titlepage-background: "`assets/titlepage-fig.pdf`{=latex}"
-page-background: "`assets/letterhead-fig.pdf`{=latex}"
+titlepage-background: "assets/titlepageFig.pdf"
+page-background: "assets/letterheadFig.pdf"
 page-background-opacity: "1"
 book: true
 classoption: [oneside]
