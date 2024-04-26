@@ -32,8 +32,7 @@ These templates are based on the report generation from https://github.com/quadr
 ## How to run
 The markdown files are a bit different between the HTML and PDF versions: the headers and the figures (the PDF assumes PDF figures while HTML
 assume an image format). 
-The YAML header is translated into latex by pandoc, and we have to tell pandoc they're already translated (thus the
-`\`file.pdf\` {=latex}` syntax).
+The YAML header is translated into latex by pandoc, and we have to tell pandoc they're already translated (thus the \`file.pdf\` {=latex} syntax).
 
 
 ```
