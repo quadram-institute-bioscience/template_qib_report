@@ -41,7 +41,7 @@ The YAML header is translated into latex by pandoc. Thus we have to tell pandoc 
 ```
 pandoc template_for_pdf.md -o result.pdf --from markdown --template assets/eisvogel --listings
 
-pandoc -s template_for_html.md -o result.html --toc"
+pandoc -s template_for_html.md -o result.html --toc
 ```
 
 ## License 
