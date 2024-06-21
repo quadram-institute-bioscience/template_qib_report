@@ -20,6 +20,20 @@ def striptags(s):
     text = re.sub(r'\{[^}]+\}', '', s)
     return re.sub(r'\n', '\n\n', text)
 
+def remove_comments(blob, verbose=False):
+    lines = blob.split('\n')
+    # Now remove all lines between two lines: `<!--hide` and `-->` (inclusive)
+    hide = False
+    new_lines = []
+    for line in lines:
+        if '<!--hide' in line:
+            print(f'\t* Removing comments') if verbose else None
+            hide = True
+        elif '-->' in line:
+            hide = False
+        elif not hide:
+            new_lines.append(line)
+    return '\n'.join(new_lines)
 def getTicket(id):
     path = None
     paths = ['/Volumes/Research-Groups/CoreBioInfo/tickets/issues.csv',
@@ -73,6 +87,9 @@ def get_snippets(directory):
                 lines = snippets[f].split('\n')
                 lines = lines[:2] + sorted(lines[4:])
                 snippets[f] = '\n'.join(lines)
+
+   
+
     return snippets
 
 def check_deps(outputFormat='html'):
@@ -158,7 +175,7 @@ def main():
             if snippetName not in snippets:
                 print(f'ERROR: Snippet {H(snippetName, color="red")} not found: {snippets.keys()}')
                 exit(1)
-            print(f'Inserting snippet {H(snippetName)}') if args.verbose else None
+            print(f'\t* snippet {H(snippetName, color="blue")}') if args.verbose else None
             inputFileText = inputFileText.replace(f'[[{snippetName}]]', snippets[snippetName])
     # Insert ticket information
 
@@ -166,11 +183,14 @@ def main():
     for match in re.finditer(key_re, inputFileText):
         key = match.group(1)
         if key in ticket:
-            print(f'Inserting ticket key {H(key)}') if args.verbose else None
+            print(f'\t* Inserting ticket key {H(key)}') if args.verbose else None
             inputFileText = inputFileText.replace(f'{{{{{key}}}}}', ticket[key])
         else:
             print(f'ERROR: Ticket key {H(key, color="red")} not found: {ticket.keys()}')
             exit(1)
+
+    # Remove comments
+    inputFileText = remove_comments(inputFileText, verbose=args.verbose)
     # Save updated input file
     tempInputFile = tempfile.NamedTemporaryFile(mode='w', delete=False, suffix='.md', dir=os.path.dirname(args.input))
     tempInputFile.write(inputFileText)
@@ -223,6 +243,7 @@ def main():
     except subprocess.CalledProcessError as e:
         print('Error while running pandoc')
         print("\t", e)
+        print(" ".join(cmd))
         sys.exit(1)
     
     

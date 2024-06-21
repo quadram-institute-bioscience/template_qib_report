@@ -1,7 +1,5 @@
 # Introduction to the service 
 
-For a list of abbreviations, see Appendix.
-
 ## Overview
 
 The Core Bioinformatics team at the Quadram Institute Bioscience
@@ -10,7 +8,7 @@ possible, develops commonly used workflows, and can supports
 bioinformatics activities for ISP funded projects.
 
 This report summarises the activities performed to support the activity
-described in Section , and additionally contains some general notes on
+described in this report, and additionally contains some general notes on
 how to access the platform and how to get help.
 
 ## Bioinformatics services
@@ -39,12 +37,8 @@ wiki](https://quadram-institute.atlassian.net/servicedesk/customer/portal/3/arti
 (will require login, but it's accessible from any network).
 
 
-> **Note:** IRIDA is the only platform managed by core bioinformatics
-> which requires a different username and password than your usual NBI
-> login. If you don't have an account on IRIDA, you can ask core
-> bioinformatics to create one for you. Similarly, if you don't see among
-> your projects an IRIDA project, please ask core bioinformatics to add
-> you as manager or collaborator on that project.
+> **Note:** IRIDA will require the same username and password as any other NBI service,
+> but you will need to login a first time to be present in the IRIDA system and subsequently being added to a project.
  
 ### HPC
 
@@ -73,7 +67,7 @@ The documentation for the QIB Galaxy is available from [this wiki page](https://
 
 ### QIB Cloud
 
-The QIB Cloud is a resource at Quadram Institute Bioscience, which
+The **QIB Cloud** is a resource at Quadram Institute Bioscience, which
 provides cloud-based compute, storage, and analysis tools.
 
 Cloud computing refers to the delivery of computing services over the
@@ -109,3 +103,5 @@ Computing, and it's advertised in the intranet calendar.
 
 Core Bioinformatics delivers topic-specific training and regular
 appointments, as described in our dedicated [section of the wiki](https://quadram-institute.atlassian.net/servicedesk/customer/portal/3/article/10059964?src=509240794).
+
+> For a list of abbreviations, see Glossary.
