@@ -13,6 +13,18 @@ import datetime
 import csv
 
 
+def insert_ticket_info(inputFileText, ticket, verbose=False):
+    key_re = r'\{\{([^\}]+)\}\}'
+    for match in re.finditer(key_re, inputFileText):
+        key = match.group(1)
+        if key in ticket:
+            print(f'\t* Inserting ticket key {H(key)}') if verbose else None
+            inputFileText = inputFileText.replace(f'{{{{{key}}}}}', ticket[key])
+        else:
+            print(f'ERROR: Ticket key {H(key, color="red")} not found: {ticket.keys()}')
+            exit(1)
+    return inputFileText
+
 def striptags(s):
     """
     Strip {color:red} and other tags from JIRA text
@@ -92,6 +104,21 @@ def get_snippets(directory):
 
     return snippets
 
+def insert_snippets(inputFileText, scriptDir, verbose=False):
+        snippets = get_snippets(os.path.join(scriptDir, 'assets', 'snippets'))
+        print(f'Found {H(len(snippets))} snippets') if verbose else None
+        # Regex to find like [[filename.md]]
+        regex = r'\[\[(.*?)\]]'
+        
+        for match in re.finditer(regex, inputFileText):
+            snippetName = match.group(1)
+            if snippetName not in snippets:
+                print(f'ERROR: Snippet {H(snippetName, color="red")} not found: {snippets.keys()}')
+                exit(1)
+            print(f'\t* snippet {H(snippetName, color="blue")}') if verbose else None
+            inputFileText = inputFileText.replace(f'[[{snippetName}]]', snippets[snippetName])
+        
+        return inputFileText
 def check_deps(outputFormat='html'):
     """
     Check some essential dependencies are available
@@ -164,30 +191,13 @@ def main():
         """
         inputFileText = re.sub(regex, f'date: "{newDate}"', inputFileText)
     ## Insert snippets
-    if '[[' in inputFileText: 
-        snippets = get_snippets(os.path.join(scriptDir, 'assets', 'snippets'))
-        print(f'Found {H(len(snippets))} snippets') if args.verbose else None
-        # Regex to find like [[filename.md]]
-        regex = r'\[\[(.*?)\]\]'
-        
-        for match in re.finditer(regex, inputFileText):
-            snippetName = match.group(1)
-            if snippetName not in snippets:
-                print(f'ERROR: Snippet {H(snippetName, color="red")} not found: {snippets.keys()}')
-                exit(1)
-            print(f'\t* snippet {H(snippetName, color="blue")}') if args.verbose else None
-            inputFileText = inputFileText.replace(f'[[{snippetName}]]', snippets[snippetName])
+    inputFileText = insert_snippets(inputFileText, scriptDir, verbose=args.verbose)
     # Insert ticket information
 
-    key_re = r'\{\{([^\}]+)\}\}'
-    for match in re.finditer(key_re, inputFileText):
-        key = match.group(1)
-        if key in ticket:
-            print(f'\t* Inserting ticket key {H(key)}') if args.verbose else None
-            inputFileText = inputFileText.replace(f'{{{{{key}}}}}', ticket[key])
-        else:
-            print(f'ERROR: Ticket key {H(key, color="red")} not found: {ticket.keys()}')
-            exit(1)
+
+
+    # Call the function in the main() function
+    inputFileText = insert_ticket_info(inputFileText, ticket, verbose=args.verbose)
 
     # Remove comments
     inputFileText = remove_comments(inputFileText, verbose=args.verbose)

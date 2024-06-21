@@ -44,6 +44,25 @@ pandoc template_for_pdf.md -o result.pdf --from markdown --template assets/eisvo
 pandoc -s template_for_html.md -o result.html --toc
 ```
 
+## Scripts
+
+Initialise a ticket template
+```bash
+# Generate a BSUP-1942.md file starting from `ticket.md`
+./init 1942
+```
+
+edit the produced md file and finally:
+
+```bash
+./make BSUP-1942.md
+```
+
+How it works:
+
+1. any `[[name]]` tag is replaced with `name.md` in assets/snippets
+2. any `{{tag}}` is replaced using ticket infos (both init.py and make.py) or hardcoded variables (init.py)
+
 ## License 
 SPDX-License-Identifier: GPL-3.0-or-later
 
